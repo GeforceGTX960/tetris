@@ -10,10 +10,10 @@
 
 
         //Config
-        game.gravity = 1.f; //Drop cycle
-        game.ARR = 0.033f; // Auto Repeat Rate
-        game.DAS = 0.142f; //Delayed Auto Shift
-        game.SDF = 6;//Soft Drop Factor
+        game.gravity = 0.5f; //Drop cycle
+        game.ARR = 0.05f; // Auto Repeat Rate
+        game.DAS = 0.15f; //Delayed Auto Shift
+        game.SDF = -1;//Soft Drop Factor
 
         // Game Loop
         while(!WindowShouldClose()){

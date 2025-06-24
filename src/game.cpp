@@ -168,16 +168,26 @@ void Game::HardDrop(){
 }
 
 void Game::RotateBlock(){
-    currentBlock.Rotate();
-    if(IsBlockOutside() || !BlockFits()){
-        currentBlock.RotateLeft();
+    for(auto it : currentBlock.kickTable[{currentBlock.rotationState, (currentBlock.rotationState+1)%4}]){
+        Block tryBlock = currentBlock;
+        tryBlock.Rotate();
+        tryBlock.Move(it.column, it.row);
+        if(!IsBlockOutside(tryBlock) && BlockFits(tryBlock)){
+            currentBlock = tryBlock;
+            break;
+        }
     }
 }
 
 void Game::RotateBlockLeft(){
-    currentBlock.RotateLeft();
-    if(IsBlockOutside() || !BlockFits()){
-        currentBlock.Rotate();
+    for(auto it : currentBlock.kickTable[{currentBlock.rotationState, (currentBlock.rotationState+3)%4}]){
+        Block tryBlock = currentBlock;
+        tryBlock.RotateLeft();
+        tryBlock.Move(it.column, it.row);
+        if(!IsBlockOutside(tryBlock) && BlockFits(tryBlock)){
+            currentBlock = tryBlock;
+            break;
+        }
     }
 }
 
