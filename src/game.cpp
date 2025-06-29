@@ -44,6 +44,18 @@ void Game::Draw(){
     DrawQueue();
 }
 
+void Game::GameReset(){
+    grid = Grid();
+    blocks = {ZBlock(), LBlock(), OBlock(), SBlock(), IBlock(), JBlock(), TBlock()};
+    currentQue = GetRandomQue();
+    nextQue = GetRandomQue();
+    currentBlock = GetRandomBlock();
+    GhostBlock = GetGhostBlock();
+    Isholdempty = true;
+    holdBlock = Block();
+    holdUsed = false;
+}
+
 void Game::HandleInput(){
     //Press
     if (IsKeyPressed(KEY_X)) RotateBlock();
@@ -51,6 +63,7 @@ void Game::HandleInput(){
     if (IsKeyPressed(KEY_A)) RotateBlock180();
     if (IsKeyPressed(KEY_C)) Hold();
     if (IsKeyPressed(KEY_SPACE)) HardDrop();
+    if(IsKeyPressed(KEY_R)) GameReset();
     
     if (IsKeyPressed(KEY_LEFT)){
         MoveBlockLeft();
