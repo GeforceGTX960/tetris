@@ -45,7 +45,7 @@ void Game::Draw(){
 }
 
 void Game::GameReset(){
-    grid = Grid();
+    grid.Initialize();
     blocks = {ZBlock(), LBlock(), OBlock(), SBlock(), IBlock(), JBlock(), TBlock()};
     currentQue = GetRandomQue();
     nextQue = GetRandomQue();
@@ -54,9 +54,14 @@ void Game::GameReset(){
     Isholdempty = true;
     holdBlock = Block();
     holdUsed = false;
+    gameOver = false;
 }
 
 void Game::HandleInput(){
+    if(gameOver){
+        if(IsKeyPressed(KEY_R)) GameReset();
+        return;
+    }
     //Press
     if (IsKeyPressed(KEY_X)) RotateBlock();
     if (IsKeyPressed(KEY_Z)) RotateBlockLeft();
@@ -219,6 +224,8 @@ void Game::LockBlock(){
     currentBlock = GetRandomBlock();
     grid.ClearFullRows();
     holdUsed = false;
+
+    if(!BlockFits()) gameOver = true;
 }
 
 void Game::DrawQueue(){
@@ -244,7 +251,11 @@ void Game::DrawQueue(){
 
     std::vector<Position> tiles = holdBlock.cells[0];
         for(Position item: tiles){
-        DrawRectangle(item.column * 30 + -5, item.row * 30 + 10, 29, 29, holdBlock.colors[holdBlock.id]);
+            if(holdUsed){
+                DrawRectangle(item.column * 30 + -5, item.row * 30 + 10, 29, 29, Fade(holdBlock.colors[holdBlock.id], 0.4));
+            }else{
+                DrawRectangle(item.column * 30 + -5, item.row * 30 + 10, 29, 29, holdBlock.colors[holdBlock.id]);
+            }
         }
 }
 

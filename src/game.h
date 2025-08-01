@@ -25,6 +25,8 @@ class Game{
         Grid grid;
         double currentTime = GetTime();
 
+        bool gameOver = false;
+
     private:
         bool BlockFits();
         bool IsBlockOutside(Block block);

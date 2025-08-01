@@ -19,5 +19,6 @@ class Grid{
         int numRows;
         int numCols;
         int cellSize;
+        int leftOffset = 160;
         std::vector<Color> colors;
 };

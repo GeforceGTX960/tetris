@@ -1,3 +1,13 @@
 *.exe
-*.dsym
-main
+*.o
+*.obj
+*.out
+*.a
+*.lib
+*.dll
+
+.vscode/
+*.code-workspace
+
+*.txt
+*.bat
