@@ -9,13 +9,12 @@
         InitWindow(WindowWidth, WindowLength, "Tetris"); //grid:400x800
 
         Game game = Game();
+        Config config("config.ini");
 
-
-        //Config
-        game.gravity = 0.5f; //Drop cycle
-        game.ARR = 0.05f; // Auto Repeat Rate
-        game.DAS = 0.15f; //Delayed Auto Shift
-        game.SDF = -1;//Soft Drop Factor
+        game.gravity = config.gravity;
+        game.ARR = config.ARR;
+        game.DAS = config.DAS;
+        game.SDF = config.SDF;
 
         // Game Loop
         while(!WindowShouldClose()){

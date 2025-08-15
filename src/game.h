@@ -1,17 +1,18 @@
 #pragma once
 #include "grid.h"
 #include "blocks.cpp"
+#include "config.h"
 #include <deque>
 #include <functional>
 
 class Game{
     public:
         Game();
-        //defult
-        float gravity = 0.5f;
-        float ARR = 0.05f; // Auto Repeat Rate
-        float DAS = 0.15f; //Delayed Auto Shift
-        int SDF = 6; //Soft Drop Factor
+
+        float gravity;
+        float ARR ;
+        float DAS;
+        int SDF;
 
         void Draw();
 
@@ -59,5 +60,5 @@ class Game{
         bool holdUsed = false;
         bool leftKeyHeld = false;
         bool rightKeyHeld = false;
-        const float OrigGravity = gravity;
+        double OrigGravity;
 };

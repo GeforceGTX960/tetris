@@ -56,6 +56,12 @@ void Game::GameReset(){
     holdBlock = Block();
     holdUsed = false;
     gameOver = false;
+
+    Config config("config.ini");
+    gravity = config.gravity;
+    ARR = config.ARR;
+    DAS = config.DAS;
+    SDF = config.SDF;
 }
 
 void Game::HandleInput(){
@@ -84,13 +90,15 @@ void Game::HandleInput(){
     }
 
     if (IsKeyPressed(KEY_DOWN)){
+        OrigGravity = gravity;
+
         if(SDF == -1){
             while(!IsBlockOutside() && BlockFits()){
                 currentBlock.Move(1,0);
             }
             currentBlock.Move(-1, 0);
         }else{
-            gravity /= SDF;
+            gravity *= SDF;
         }
     }
 
@@ -140,8 +148,7 @@ void Game::MoveBlockDown(){
             landedtime = GetTime();
             HasLanded = true;
         }
-        else if(GetTime() - landedtime >= 3 * gravity){
-            LockBlock();
+        else if(GetTime() - landedtime >= 0.5){
             HasLanded = false;
         }
     }
@@ -171,7 +178,8 @@ void Game::Hold(){
 
 bool Game::GravityTriggered(){
     static double lastUpdateTime = 0;
-    if(currentTime - lastUpdateTime >= gravity){
+    double interval = (1.0/60.0)/gravity;
+    if(currentTime - lastUpdateTime >= interval){
         lastUpdateTime = currentTime;
         return true;
     }
