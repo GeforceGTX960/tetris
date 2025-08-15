@@ -19,11 +19,4 @@ Config::Config(const std::string &file){
     ARR = reader.GetReal("Game", "ARR", 0.05);
     DAS = reader.GetReal("Game", "DAS", 0.15);
     SDF = reader.GetInteger("Game", "SDF", 9);
-
-    std::cout << "file loaded successfully\n";
-
-    std::cout << gravity << std::endl;
-    std::cout << ARR << std::endl;
-    std::cout << DAS << std::endl;
-    std::cout << SDF << std::endl;
 }

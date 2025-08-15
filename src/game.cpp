@@ -149,6 +149,7 @@ void Game::MoveBlockDown(){
             HasLanded = true;
         }
         else if(GetTime() - landedtime >= 0.5){
+            LockBlock();
             HasLanded = false;
         }
     }
