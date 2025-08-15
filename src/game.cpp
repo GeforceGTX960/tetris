@@ -42,6 +42,7 @@ void Game::Draw(){
     GhostBlock.DrawFade();
     GhostBlock = GetGhostBlock();
     DrawQueue();
+    DrawInterface();
 }
 
 void Game::GameReset(){
@@ -243,7 +244,7 @@ void Game::DrawQueue(){
         Block preview = previewQue[i];
         std::vector<Position> tiles = preview.cells[0];
         for(Position item: tiles){
-        DrawRectangle(item.column * 30 + 591, item.row * 30 + i *90 + 10, 29, 29, preview.colors[preview.id]);
+        DrawRectangle(item.column * 30 + 589, item.row * 30 + i *90 + 30, 29, 29, preview.colors[preview.id]);
         }
     }
 
@@ -252,11 +253,21 @@ void Game::DrawQueue(){
     std::vector<Position> tiles = holdBlock.cells[0];
         for(Position item: tiles){
             if(holdUsed){
-                DrawRectangle(item.column * 30 + -5, item.row * 30 + 10, 29, 29, Fade(holdBlock.colors[holdBlock.id], 0.4));
+                DrawRectangle(item.column * 30 + 24, item.row * 30 + 40, 29, 29, Fade(holdBlock.colors[holdBlock.id], 0.4));
             }else{
-                DrawRectangle(item.column * 30 + -5, item.row * 30 + 10, 29, 29, holdBlock.colors[holdBlock.id]);
+                DrawRectangle(item.column * 30 + 24, item.row * 30 + 40, 29, 29, holdBlock.colors[holdBlock.id]);
             }
         }
+}
+
+void Game::DrawInterface(){
+    //hold
+    DrawText("Hold", 45, 165, 30, Fade(WHITE, 0.7));
+    DrawRectangleLines(20.7, 36, 127, 127, Fade(WHITE, 0.5));
+
+    //next
+    DrawText("Next", 600, 480, 30, Fade(WHITE, 0.7));
+    DrawRectangleLines(570, 10, 145, 470, Fade(WHITE, 0.5));
 }
 
 bool Game::IsBlockOutside(){

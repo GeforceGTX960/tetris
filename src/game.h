@@ -38,6 +38,7 @@ class Game{
         void HardDrop();
         void LockBlock();
         void DrawQueue();
+        void DrawInterface();
         void HandleHeldInput(int KEY, double lastPressTime, std::function<void()>);
         void GameReset();
         Block GetRandomBlock();
